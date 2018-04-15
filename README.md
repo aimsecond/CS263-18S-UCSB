@@ -28,14 +28,15 @@ Week 10: Presentation
 ---
 **Project Member**
 
-![image](./week_2/Chang%20Lu.JPG){:height="400px" width="400px"}
-
 Chang Lu [Email](changlu@umail.ucsb.edu)
 
-![image](./week_2/Haowen%20Zhang.JPG){:height="400px" width="400px"}
+<img src="./week_2/Chang%20Lu.JPG" width="250">
 
 Haowen Zhang [Email](haowen@ucsb.edu)
 
+<img src="./week_2/Haowen%20Zhang.JPG" width="250">
+
+---
 **Project Idea**
 
 Performance comparisons
