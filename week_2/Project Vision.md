@@ -27,7 +27,7 @@ We are going to start with the programs compared in Benchmark Games and meanwhil
 
 **Estimated Timeline**
 
-Week 2: Determine which topic to choose, finish project vision,
+Week 2: Determine which topic to choose, finish project vision **[Finished]**
 
 Week 3: Download these interpreter. Learn how to use different interpreters
 
