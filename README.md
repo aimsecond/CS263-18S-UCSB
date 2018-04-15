@@ -7,22 +7,33 @@ The repository for uploading UCSB [CS263: Runtime System](http://www.cs.ucsb.edu
 
 Week 2: Determine which topic to choose, finish project vision **[Finished]**
 
- - [x] [project vision](week_2/Project%20Vision.md)
+ - [x] [project vision](./week_2/Project%20Vision.md)
 
 Week 3: Download these interpreter. Learn how to use different interpreters
+
 Week 4: Pypy performance measurement
+
 Week 5: IronPython performance measurement
+
 Week 6: PyPy/JIT performance measurement
+
 Week 7: CPython performance measurement
+
 Week 8: Jython performance measurement
+
 Week 9: Compare these performance and produce the report
+
 Week 10: Presentation
 
 ---
 **Project Member**
-![Alt text](week_2/Chang%20Lu.JPG?raw=true "Title")
+
+![image](./week_2/Chang%20Lu.JPG =500x500)
+
 Chang Lu [Email](changlu@umail.ucsb.edu)
-![Alt text](week_2/Haowen%20Zhang.JPG?raw=true "Title")
+
+![image](./week_2/Haowen%20Zhang.JPG =500x500)
+
 Haowen Zhang [Email](haowen@ucsb.edu)
 
 **Project Idea**
