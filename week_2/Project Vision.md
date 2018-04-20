@@ -37,7 +37,7 @@ Week 5: IronPython performance measurement
 
 Week 6: PyPy/JIT performance measurement
 
-Week 7: CPython performance measurement
+Week 7: Cython performance measurement
 
 Week 8: Jython performance measurement
 
