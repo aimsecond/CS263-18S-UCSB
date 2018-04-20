@@ -11,15 +11,15 @@ Week 2: Determine which topic to choose, finish project vision **[Finished]**
 
 Week 3: Download these interpreter. Learn how to use different interpreters
 
-Week 4: Pypy performance measurement
+Week 4: [Pypy](https://pypy.org/) performance measurement
 
-Week 5: IronPython performance measurement
+Week 5: [IronPython](http://ironpython.net/) performance measurement
 
-Week 6: PyPy/JIT performance measurement
+Week 6: [PyPy/JIT](https://pypy.org/) performance measurement
 
-Week 7: CPython performance measurement
+Week 7: [Cython](http://cython.org/) performance measurement
 
-Week 8: Jython performance measurement
+Week 8: [Jython](http://www.jython.org/) performance measurement
 
 Week 9: Compare these performance and produce the report
 
