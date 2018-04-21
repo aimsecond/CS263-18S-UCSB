@@ -9,7 +9,10 @@ Week 2: Determine which topic to choose, finish project vision **[Finished]**
 
  - [x] [project vision](./week_2/Project%20Vision.md)
 
-Week 3: Download these interpreter. Learn how to use different interpreters
+Week 3: Download these interpreter. Learn how to use different interpreters **[Finished]**
+ - [x] [work log on Windows environment](./week_3/work_log_Chang.md)
+ - [x] [work log on Ubuntu docker environment](./week_3/work_log_Haowen.md)
+ - [x] Tested a timer program for each interpreter/compiler
 
 Week 4: [Pypy](https://pypy.org/) performance measurement
 
