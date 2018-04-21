@@ -55,13 +55,16 @@ L3 cache:              30720K
 >>Jython 2.7.0
 
 ### Test on ubuntu container
+---
 **Test PyPy/JIT:**
+
 Use command:
 >$ pypy test.py
 
 the result is:
 >0.114142179489
 
+---
 **For PyPy without JIT:**
 Use command: 
 >pypy --jit off test.py
@@ -69,6 +72,7 @@ Use command:
 the result is:
 >8.60718107224
 
+---
 **For Cython:**
 First rename test.py to test.pyx, then use command below to "make" (the test.pyx abd setup.py file are both provided in the week3 folder.)
 >python setup.py build_ext --inplace
@@ -81,12 +85,15 @@ Then we will have file test.so in the directory. To run test.so, we need to open
 the result is:
 >1.4676668644
 
+---
 **For Jython:**
+
 Use command:
 >$ jython test.py
 
 the result is:
 >6.34200000763
 
+---
 **For IronPython:**
 We currently have difficulty installing IronPython on Ubuntu, so this time we will skip IronPython.
