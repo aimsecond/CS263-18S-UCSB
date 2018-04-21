@@ -2,6 +2,8 @@
 
 After discussed with ChangLu, we decided to test those different python interpreters on different platforms
 I will test them on a linux machine, with 1GB memory and a Intel(R) Xeon(R) CPU @ 2.50GHz Cpu
+
+### Environment parameters
 >$ cat /proc/cpuinfo
 >>model name: Intel(R) Xeon(R) CPU @ 2.50GHz
 
@@ -29,7 +31,7 @@ L2 cache:              256K
 L3 cache:              30720K
 >>NUMA node0 CPU(s):     0-7
 
-## Time line
+### Time line
 **Apr.15**
 1. Created a ubunutu based container in [Cloud9](https://ide.c9.io/aimsecond/cs263-18s-ucsb) as one of our test environment
 2. Installed pypy on the ubuntu container.
@@ -51,3 +53,40 @@ L3 cache:              30720K
 1. Installed Jython on the ubuntu container
 >$ jython --version
 >>Jython 2.7.0
+
+### Test on ubuntu container
+**Test PyPy/JIT:**
+Use command:
+>$ pypy test.py
+
+the result is:
+>0.114142179489
+
+**For PyPy without JIT:**
+Use command: 
+>pypy --jit off test.py
+
+the result is:
+>8.60718107224
+
+**For Cython:**
+First rename test.py to test.pyx, then use command below to "make" (the test.pyx abd setup.py file are both provided in the week3 folder.)
+>python setup.py build_ext --inplace
+
+Then we will have file test.so in the directory. To run test.so, we need to open the python interactive shell and import it:
+>$ python
+
+>\>\>\> import test
+
+the result is:
+>1.4676668644
+
+**For Jython:**
+Use command:
+>$ jython test.py
+
+the result is:
+>6.34200000763
+
+**For IronPython:**
+We currently have difficulty installing IronPython on Ubuntu, so this time we will skip IronPython.
