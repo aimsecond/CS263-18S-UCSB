@@ -1,6 +1,6 @@
-#Week 3 Windows worklog
-##Environment Setup
-###Installing PyPy on Windows
+# Week 3 Windows worklog
+## Environment Setup
+### Installing PyPy on Windows
 -	Download the windows version PyPy(with JIT) from [PyPy](https://PyPy.org/download.html)
 -	Download VS 2008 runtime library installer and install
 -	Unzip zip file to local
