@@ -7,6 +7,7 @@
 # 2to3
 
 from sys import stdin
+import time
 
 def gen_freq(seq, frame, frequences):
     ns = len(seq) + 1 - frame
@@ -53,4 +54,6 @@ def main():
     for se in "GGT GGTA GGTATT GGTATTTTAATT GGTATTTTAATTTATAGT".split():
         find_seq(sequence, se, frequences)
 
+t=time.time()
 main()
+print time.time()-t
