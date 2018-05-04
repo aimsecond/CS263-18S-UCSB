@@ -12,6 +12,11 @@ from math      import sqrt
 from sys       import argv
 import sys
 
+import time
+from memory_profiler import profile
+import psutil
+import os
+
 if sys.version_info < (3, 0):
     from itertools import izip as zip
 else:
@@ -52,6 +57,7 @@ def eval_AtA_times_u (u, out, tmp):
     eval_A_times_u (u, tmp)
     eval_At_times_u (tmp, out)
 
+@profile
 def main():
     n = int (argv [1])
     u = array("d", [1]) * n
@@ -71,4 +77,9 @@ def main():
     
     print("%0.9f" % (sqrt(vBv/vv)))
 
+t=time.time()
 main()
+print 'user time: ',time.time()-t
+print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+print 'CPU load: ',psutil.cpu_percent(percpu=True)
+print 'overall cpu times: ',psutil.cpu_times()

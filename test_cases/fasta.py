@@ -8,6 +8,10 @@ source code
 # 2to3
 
 import sys, bisect
+import time
+from memory_profiler import profile
+import psutil
+import os
 
 alu = (
    'GGCCGGGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGG'
@@ -69,7 +73,7 @@ def randomFasta(table, n):
         print(x)
     if n % width:
         print(jn([chars[bb(probs, gR())] for i in range(n % width)]))
-
+@profile
 def main():
     n = int(sys.argv[1])
 
@@ -82,4 +86,9 @@ def main():
     print('>THREE Homo sapiens frequency')
     randomFasta(homosapiens, n*5)
 
+t=time.time()	
 main()
+print 'user time: ',time.time()-t
+print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+print 'CPU load: ',psutil.cpu_percent(percpu=True)
+print 'overall cpu times: ',psutil.cpu_times()

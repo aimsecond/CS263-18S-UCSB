@@ -8,6 +8,11 @@ from itertools import islice
 import multiprocessing
 from sys import argv, stdout
 
+import time
+from memory_profiler import profile
+import psutil
+import os
+
 def pixels(y, n, abs):
     range7 = bytearray(range(7))
     pixel_bits = bytearray(128 >> pos for pos in range(8))
@@ -64,6 +69,7 @@ def compute_rows(n, f):
 		for bar in ordered_rows(unordered_rows, n):
 			yield bar
 		pool.terminate()
+@profile
 def mandelbrot(n):
     write = stdout.write
 
@@ -73,4 +79,9 @@ def mandelbrot(n):
             write(row[1])
 
 if __name__ == '__main__':
+	t=time.time()
     mandelbrot(int(argv[1]))
+	print 'user time: ',time.time()-t
+	print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+	print 'CPU load: ',psutil.cpu_percent(percpu=True)
+	print 'overall cpu times: ',psutil.cpu_times()

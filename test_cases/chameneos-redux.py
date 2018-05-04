@@ -4,8 +4,12 @@
 # 2to3
 
 import sys
-import _thread
+import thread
 import time
+
+from memory_profiler import profile
+import psutil
+import os
 
 # colors and matching
 creature_colors = ['blue', 'red', 'yellow']
@@ -63,7 +67,7 @@ def creature(my_id, venue, my_lock_acquire, in_lock_acquire, out_lock_release):
 
 
 def let_them_meet(meetings_left, input_zoo,
-                  compl=compl_dict, allocate=_thread.allocate_lock):
+                  compl=compl_dict, allocate=thread.allocate_lock):
     # prepare
     c_no = len(input_zoo)
     venue = [-1]
@@ -84,7 +88,7 @@ def let_them_meet(meetings_left, input_zoo,
     # let creatures wild
     for ci in range(c_no):
         args = (ci, venue, locks[ci].acquire, in_lock_acquire, out_lock_release)
-        new = _thread.start_new_thread(creature, args)
+        new = thread.start_new_thread(creature, args)
     time.sleep(0.05)     # to reduce work-load imbalance
     
     in_lock_release()   # signal "meeting_place open for registration"
@@ -110,7 +114,7 @@ def let_them_meet(meetings_left, input_zoo,
         else:
             report(input_zoo, met, self_met)
 
-           
+#@profile       
 def chameneosiate(n):
 
     check_complement()
@@ -119,5 +123,9 @@ def chameneosiate(n):
                       'blue', 'red', 'yellow', 'red', 'blue'])
     #print ''
 
-
+t=time.time()
 chameneosiate(int(sys.argv[1]))       
+print 'user time: ',time.time()-t
+print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+print 'CPU load: ',psutil.cpu_percent(percpu=True)
+print 'overall cpu times: ',psutil.cpu_times()

@@ -4,12 +4,7 @@
 
 from sys import argv
 
-import time
-from memory_profiler import profile
-import psutil
-import os
 
-@profile
 def main():
 	try:
 		N = int(argv[1])
@@ -41,9 +36,5 @@ def main():
 				a -= d*t
 				a *= 10
 				n *= 10
-t=time.time()
+
 main()
-print 'user time: ',time.time()-t
-print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
-print 'CPU load: ',psutil.cpu_percent(percpu=True)
-print 'overall cpu times: ',psutil.cpu_times()

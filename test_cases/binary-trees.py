@@ -8,6 +8,10 @@
 import sys
 import multiprocessing as mp
 
+import time
+from memory_profiler import profile
+import psutil
+import os
 
 def make_tree(d):
 
@@ -31,7 +35,6 @@ def make_check(itde, make=make_tree, check=check_tree):
     i, d = itde
     return check(make(d))
 
-
 def get_argchunks(i, d, chunksize=5000):
 
     assert chunksize % 2 == 0
@@ -44,7 +47,7 @@ def get_argchunks(i, d, chunksize=5000):
     if len(chunk) > 0:
         yield chunk
 
-
+@profile
 def main(n, min_depth=4):
 
     max_depth = max(min_depth + 2, n)
@@ -73,6 +76,13 @@ def main(n, min_depth=4):
 
 
 if __name__ == '__main__':
-    main(int(sys.argv[1]))
+	t=time.time()
+	main(int(sys.argv[1]))
+	print 'user time: ',time.time()-t
+	print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+	print 'CPU load: ',psutil.cpu_percent(percpu=True)
+	print 'overall cpu times: ',psutil.cpu_times()
+	
+
     
 

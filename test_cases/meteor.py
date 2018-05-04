@@ -8,6 +8,11 @@ from __future__ import print_function
 import sys
 from bisect import bisect
 
+import time
+from memory_profiler import profile
+import psutil
+import os
+
 w, h = 5, 10
 dir_no = 6
 S, E = w * h, 2
@@ -131,6 +136,7 @@ def solve(n, i_min, free, curr_board, pieces_left, solutions,
             return
     return
 
+@profile
 def main(n):
 
     free = frozenset(range(len(board)))
@@ -141,4 +147,9 @@ def main(n):
     print(len(solutions),  'solutions found\n')
     for i in (0, -1): print_board(solutions[i])
 
+t=time.time()
 main(int(sys.argv[1]))
+print 'user time: ',time.time()-t
+print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+print 'CPU load: ',psutil.cpu_percent(percpu=True)
+print 'overall cpu times: ',psutil.cpu_times()

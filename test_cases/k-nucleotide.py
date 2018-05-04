@@ -8,6 +8,9 @@
 
 from sys import stdin
 import time
+from memory_profiler import profile
+import psutil
+import os
 
 def gen_freq(seq, frame, frequences):
     ns = len(seq) + 1 - frame
@@ -34,7 +37,7 @@ def find_seq(seq, s, frequences):
     n,t = gen_freq(seq, len(s), frequences)
     print "%d\t%s" % (t.get(s, 0), s)
 
-
+@profile
 def main():
     frequences = {}
     for line in stdin:
@@ -56,4 +59,7 @@ def main():
 
 t=time.time()
 main()
-print time.time()-t
+print 'user time: ',time.time()-t
+print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+print 'CPU load: ',psutil.cpu_percent(percpu=True)
+print 'overall cpu times: ',psutil.cpu_times()

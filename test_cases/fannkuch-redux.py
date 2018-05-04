@@ -9,6 +9,11 @@ from math import factorial
 from multiprocessing import cpu_count, Pool
 from itertools import islice, starmap
 
+import time
+from memory_profiler import profile
+import psutil
+import os
+
 def permutations(n, start, size):
     p = bytearray(range(n))
     count = bytearray(n)
@@ -73,7 +78,7 @@ def alternating_flips_generator(n, start, size):
 def task(n, start, size):
     alternating_flips = alternating_flips_generator(n, start, size)
     return sum(islice(alternating_flips, size)), next(alternating_flips)
-
+@profile
 def fannkuch(n):
     if n < 0:
         for data in islice(permutations(-n, 0, factorial(-n)), factorial(-n)):
@@ -103,4 +108,9 @@ def fannkuch(n):
         print("{0}\nPfannkuchen({1}) = {2}".format(checksum, n, maximum))
 
 if __name__ == "__main__":
+	t=time.time()
     fannkuch(int(argv[1]))
+	print 'user time: ',time.time()-t
+	print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+	print 'CPU load: ',psutil.cpu_percent(percpu=True)
+	print 'overall cpu times: ',psutil.cpu_times()

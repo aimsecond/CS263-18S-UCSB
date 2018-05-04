@@ -8,7 +8,13 @@
 
 import sys
 import itertools
-      
+
+import time
+from memory_profiler import profile
+import psutil
+import os
+  
+@profile  
 def main(n = int(sys.argv[1]), n_threads=503, cycle=itertools.cycle):
 
     def worker(worker_id):
@@ -31,4 +37,9 @@ def main(n = int(sys.argv[1]), n_threads=503, cycle=itertools.cycle):
         except StopIteration:
             break
 
+t=time.time()
 main()
+print 'user time: ',time.time()-t
+print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
+print 'CPU load: ',psutil.cpu_percent(percpu=True)
+print 'overall cpu times: ',psutil.cpu_times()
