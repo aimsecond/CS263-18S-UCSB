@@ -1,4 +1,4 @@
-#WorkLog for week 5
+# WorkLog for week 5
 - Complete the code submitted last week
 We submit the test case last week for PyPy, and all the code can be run in
 the command line, but we did not finish the work of measurement. We have
