@@ -15,8 +15,14 @@ Week 3: Download these interpreter. Learn how to use different interpreters **[F
  - [x] Tested a timer program for each interpreter/compiler
 
 Week 4: [Pypy](https://pypy.org/) performance measurement
+ - [x] [work log on Windows environment](./week_4/work_log_ChangLu.md)
+ - [x] [work log on Ubuntu docker environment](./week_4/work_log_Haowen.md)
+ - [x] All the programs now is ready to run with pypy without errors.
+ - [ ] Finish the auto-measurement script for pypy.
 
 Week 5: [IronPython](http://ironpython.net/) performance measurement
+ - [ ] Finish the auto-measurement script for IronPython.
+ - [ ] Install the IronPython to the Ubuntu environment.
 
 Week 6: [PyPy/JIT](https://pypy.org/) performance measurement
 
