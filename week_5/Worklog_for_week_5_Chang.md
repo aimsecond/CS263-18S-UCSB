@@ -26,5 +26,5 @@ which supports lots of modules including psutil.
 - Issues needs to be solve:
 We have successfully measure the performance of one of the IronPython program,
 but still have more work to do with other programs, we have to find similar program 
-as mentioned in project vision. However, there are many packages that IronPython dos 
+as mentioned in project vision. However, there are many packages that IronPython does 
 not support, So There will be some programs that has no alternative in IronPython. 
