@@ -7,12 +7,6 @@
 from sys import stdin,stdout
 from re import sub, findall
 
-import time
-from memory_profiler import profile
-import psutil
-import os
-
-# @profile
 def main():
     seq = stdin.read()
     write = stdout.write
@@ -45,9 +39,4 @@ def main():
     write(bytes(str(clen)) + b'\n')
     write(bytes(str(len(seq))) + b'\n')
 
-t=time.time()
 main()
-print 'user time: ',time.time()-t
-print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
-print 'CPU load: ',psutil.cpu_percent(percpu=True)
-print 'overall cpu times: ',psutil.cpu_times()

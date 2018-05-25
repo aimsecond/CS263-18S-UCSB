@@ -1,15 +1,11 @@
 # The Computer Language Benchmarks Game
-# https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
+# http://benchmarksgame.alioth.debian.org/
 # contributed by Daniel Nanz 2008-04-10
 # 2to3
 
 import sys
 import thread
 import time
-
-from memory_profiler import profile
-import psutil
-import os
 
 # colors and matching
 creature_colors = ['blue', 'red', 'yellow']
@@ -114,7 +110,7 @@ def let_them_meet(meetings_left, input_zoo,
         else:
             report(input_zoo, met, self_met)
 
-# @profile       
+           
 def chameneosiate(n):
 
     check_complement()
@@ -123,9 +119,5 @@ def chameneosiate(n):
                       'blue', 'red', 'yellow', 'red', 'blue'])
     #print ''
 
-t=time.time()
-chameneosiate(int(sys.argv[1]))       
-print 'user time: ',time.time()-t
-print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
-print 'CPU load: ',psutil.cpu_percent(percpu=True)
-print 'overall cpu times: ',psutil.cpu_times()
+
+chameneosiate(int(sys.argv[1]))
