@@ -4,11 +4,11 @@ import subprocess
 import time
 
 mem_use=0
-myinput = open('knucleotide-input.txt')
+# myinput = open('knucleotide-input.txt')
 PERCPU_start=psutil.cpu_times(percpu=True)
 t=time.time()
-p=subprocess.Popen('pypy k-nucleotide.py',stdin=myinput,creationflags =0)
-# p=subprocess.Popen('pypy thread-ring.py 5000000',creationflags =0)
+# p=subprocess.Popen('pypy k-nucleotide.py',stdin=myinput,creationflags =0)
+p=subprocess.Popen('pypy richards.py 10',creationflags =0)
 pi=p.pid
 # p=subprocess.Popen('ipy n-body.ipy 5000000', creationflags =0)
 while p.poll()is None:
