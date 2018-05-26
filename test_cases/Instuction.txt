@@ -1,0 +1,42 @@
+#Cpython2
+
+binary-trees,14
+chameneos-redux,6000000
+fannkuch-redux,10
+fasta,2500000
+k-nucleotide,0 < knucleotide-input.txt
+meteor-contest,2098
+n-body,5000000
+pidigits,10000
+regex-dna,0 < regexdna-input.txt
+reverse-complement,0 < revcomp-input.txt
+thread-ring,5000000
+spectral-norm,550
+
+#Pypy
+
+binary-trees,14
+chameneos-redux,6000000
+fannkuch-redux,10
+fasta,2500000
+k-nucleotide,0 < knucleotide-input.txt
+meteor-contest,2098
+n-body,5000000
+pidigits,10000
+regex-dna,0 < regexdna-input.txt
+reverse-complement,0 < revcomp-input.txt
+thread-ring,5000000
+spectral-norm,550
+
+#IronPython
+
+fibonacci,1000000
+k-nucleotide,0 < knucleotide-input.txt
+n-body,5000000
+pidigits,10000
+regex-dna,0 < regexdna-input.txt
+richards,10
+reverse-complement,0 < revcomp-input.txt
+thread-ring,5000000
+spectral-norm,550
+
