@@ -6,6 +6,7 @@
 
 from sys import stdin,stdout
 from re import sub, findall
+import time
 
 def main():
     seq = stdin.read()

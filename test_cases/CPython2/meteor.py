@@ -1,109 +1,144 @@
 # The Computer Language Benchmarks Game
 # http://benchmarksgame.alioth.debian.org/
 #
-# contributed by Olof Kraigher
-# modified by Tupteq
+# contributed by Daniel Nanz, 2008-08-21
 # 2to3
 
 from __future__ import print_function
 import sys
+from bisect import bisect
 
-width = 5
-height = 10
-
-rotate = dict(E='NE', NE='NW', NW='W', W='SW', SW='SE', SE='E')
-flip = dict(E='W', NE='NW', NW='NE', W='E', SW='SE', SE='SW')
-move = dict(E=lambda x, y: (x+1, y),
-            W=lambda x, y: (x-1, y),
-            NE=lambda x, y: (x + (y%2), y-1),
-            NW=lambda x, y: (x + (y%2) - 1, y-1),
-            SE=lambda x, y: (x + (y%2), y+1),
-            SW=lambda x, y: (x + (y%2) - 1, y+1))
-
-solutions = []
-masks = 10 * [0]
-
-valid = lambda x, y: 0 <= x < width and 0 <= y < height
-zerocount = lambda mask: sum([(1<= 0):
-            if (masks[j] & cellMask) == cellMask:
-                masksAtCell[cellCounter][color].append(masks[j])
-                j = j-1
-            else:
-                cellMask = cellMask >> 1
-                cellCounter -= 1
-        color += 1
+w, h = 5, 10
+dir_no = 6
+S, E = w * h, 2
+SE = S + (E / 2)
+SW = SE - E
+W, NW, NE = -E, -SE, -SW
 
 
-def solveCell(cell, board):
-    if to_go <= 0:
-        # Got enough solutions
-        pass
-    elif board == 0x3FFFFFFFFFFFF:
-        # Solved
-        addSolutions()
-    elif board & (1 << cell) != 0:
-        # Cell full
-        solveCell(cell-1, board)
-    elif cell < 0:
-        # Out of board
-        pass
-    else:
-        for color in range(10):
-            if masks[color] == 0:
-                for mask in masksAtCell[cell][color]:
-                    if mask & board == 0:
-                        masks[color] = mask
-                        solveCell(cell-1, board | mask)
-                        masks[color] = 0
+def rotate(ido, rd={E: NE, NE: NW, NW: W, W: SW, SW: SE, SE: E}):
+    return [rd[o] for o in ido]
+
+def flip(ido, fd={E: E, NE: SE, NW: SW, W: W, SW: NW, SE: NE}):
+    return [fd[o] for o in ido]
 
 
-def addSolutions():
-    global to_go
-    s = ''
-    mask = 1
-    for y in range(height):
-        for x in range(width):
-            for color in range(10):
-                if masks[color] & mask != 0:
-                    s += str(color)
-                    break
-                elif color == 9:
-                    s += '.'
-            mask <<= 1
+def permute(ido, r_ido, rotate=rotate, flip=flip):
 
-    # Inverse
-    ns = ''
-    for y in range(height):
-        for x in range(width):
-            ns += s[width - x - 1 + (width - y - 1) * width]
-
-    # Finally append
-    solutions.append(s)
-    solutions.append(ns)
-    to_go -= 2
+    ps = [ido]
+    for r in range(dir_no - 1):
+        ps.append(rotate(ps[-1]))
+        if ido == r_ido:                 # C2-symmetry
+            ps = ps[0:dir_no//2]
+    for pp in ps[:]:
+        ps.append(flip(pp))
+    return ps
 
 
-def printSolution(solution):
-    for y in range(height):
-        for x in range(width):
-            print(solution[x + y*width], end=' ')
+def convert(ido):
+    '''incremental direction offsets -> "coordinate offsets" '''
+    out = [0]
+    for o in ido:
+        out.append(out[-1] + o)
+    return list(set(out))
 
-        print("")
+
+def get_footprints(board, cti, pieces):
+
+    fps = [[[] for p in range(len(pieces))] for ci in range(len(board))]
+    for c in board:
+        for pi, p in enumerate(pieces):
+            for pp in p:
+                fp = frozenset(cti[c + o] for o in pp if (c + o) in cti)
+                if len(fp) == 5:
+                    fps[min(fp)][pi].append(fp)
+    return fps
+
+
+def get_senh(board, cti):
+    '''-> south-east neighborhood'''
+    se_nh = []
+    nh = [E, SW, SE]
+    for c in board:
+        se_nh.append(frozenset(cti[c + o] for o in nh if (c + o) in cti))
+    return se_nh
+
+
+def get_puzzle(w=w, h=h):
+
+    board = [E*x + S*y + (y%2) for y in range(h) for x in range(w)]
+    cti = dict((board[i], i) for i in range(len(board)))
+
+    idos = [[E, E, E, SE],         # incremental direction offsets
+            [SE, SW, W, SW],
+            [W, W, SW, SE],
+            [E, E, SW, SE],
+            [NW, W, NW, SE, SW],
+            [E, E, NE, W],
+            [NW, NE, NE, W],
+            [NE, SE, E, NE],
+            [SE, SE, E, SE],
+            [E, NW, NW, NW]]
+
+    perms = (permute(p, idos[3]) for p in idos)    # restrict piece 4
+    pieces = [[convert(pp) for pp in p] for p in perms]
+    return (board, cti, pieces)
+
+
+def print_board(board, w=w, h=h):
+
+    for y in range(h):
+        for x in range(w):
+            print(board[x + y * w], end=' ')
+        print('')
         if y % 2 == 0:
-            print("", end=' ')
+            print('', end=' ')
     print()
 
 
-def solve(n):
-    global to_go
-    to_go = n
-    generateBitmasks()
-    solveCell(width*height - 1, 0)
+board, cti, pieces = get_puzzle()
+fps = get_footprints(board, cti, pieces)
+se_nh = get_senh(board, cti)
 
 
-if __name__ == "__main__":
-    solve(int(sys.argv[1]))
+def solve(n, i_min, free, curr_board, pieces_left, solutions,
+          fps=fps, se_nh=se_nh, bisect=bisect):
 
-    print("%d solutions found\n" % len(solutions))
-    printSolution(min(solutions))
-    printSolution(max(solutions))
+    fp_i_cands = fps[i_min]
+    for p in pieces_left:
+        fp_cands = fp_i_cands[p]
+        for fp in fp_cands:
+            if fp <= free:
+                n_curr_board = curr_board[:]
+                for ci in fp:
+                    n_curr_board[ci] = p
+                if len(pieces_left) > 1:
+                    n_free = free - fp
+                    n_i_min = min(n_free)
+                    if len(n_free & se_nh[n_i_min]) > 0:
+                        n_pieces_left = pieces_left[:]
+                        n_pieces_left.remove(p)
+                        solve(n, n_i_min, n_free, n_curr_board,
+                              n_pieces_left, solutions)
+                else:
+                    s = ''.join(map(str, n_curr_board))
+                    solutions.insert(bisect(solutions, s), s)
+                    rs = s[::-1]
+                    solutions.insert(bisect(solutions, rs), rs)
+                    if len(solutions) >= n:
+                        return
+        if len(solutions) >= n:
+            return
+    return
+
+def main(n):
+
+    free = frozenset(range(len(board)))
+    curr_board = [-1] * len(board)
+    pieces_left = list(range(len(pieces)))
+    solutions = []
+    solve(n, 0, free, curr_board, pieces_left, solutions)
+    print(len(solutions),  'solutions found\n')
+    for i in (0, -1): print_board(solutions[i])
+
+main(int(sys.argv[1]))

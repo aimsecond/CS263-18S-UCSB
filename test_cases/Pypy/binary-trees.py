@@ -4,12 +4,11 @@
 # contributed by Antoine Pitrou
 # modified by Dominique Wahli and Daniel Nanz
 
+from __future__ import print_function
+
 import sys
 import multiprocessing as mp
-import time
-from memory_profiler import profile
-import psutil
-import os
+
 
 def make_tree(i, d):
  
@@ -47,7 +46,7 @@ def get_argchunks(i, d, chunksize=5000):
     if len(chunk) > 0:
         yield chunk
 
-# @profile
+
 def main(n, min_depth=4):
 
     max_depth = max(min_depth + 2, n)
@@ -76,9 +75,4 @@ def main(n, min_depth=4):
 
 
 if __name__ == '__main__':
-	t=time.time()
-	main(int(sys.argv[1]))
-	print 'user time: ',time.time()-t
-	print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
-	print 'CPU load: ',psutil.cpu_percent(percpu=True)
-	print 'overall cpu times: ',psutil.cpu_times()
+    main(int(sys.argv[1]))

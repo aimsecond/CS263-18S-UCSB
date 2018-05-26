@@ -8,10 +8,6 @@
 
 import sys 
 
-import time
-from memory_profiler import profile
-import psutil
-import os
 
 def combinations(l):
     result = []
@@ -111,7 +107,6 @@ def offset_momentum(ref, bodies=SYSTEM, px=0.0, py=0.0, pz=0.0):
     v[1] = py / m
     v[2] = pz / m
 
-# @profile
 def main(n, ref='sun'):
     offset_momentum(BODIES[ref])
     report_energy()
@@ -119,9 +114,4 @@ def main(n, ref='sun'):
     report_energy()
 
 if __name__ == '__main__':
-    t=time.time()
     main(int(sys.argv[1]))
-    print 'user time: ',time.time()-t
-    print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
-    print 'CPU load: ',psutil.cpu_percent(percpu=True)
-    print 'overall cpu times: ',psutil.cpu_times()
