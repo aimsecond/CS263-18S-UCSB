@@ -18,4 +18,4 @@ reverse-complement ['CPython', 'PyPy', 'Jython']
 # Todo
 - 补全fibonacci 和 pystone
 - 删除fannkuch-redux
-- 把program按照上面的名称进行规范命名
+

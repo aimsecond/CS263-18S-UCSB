@@ -1,0 +1,11 @@
+#Jython
+fasta.out
+knucleotide.out
+meteor.out
+nbody.out
+pidigits.out
+regexdna.out
+revcomp.out
+richards.out
+spectralnorm.out
+threadring.out

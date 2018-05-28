@@ -1,0 +1,14 @@
+#CPython
+binary-trees.out
+chameneos-redux.out
+fannkuch-redux.out
+fasta.out
+k-nucleotide.out
+meteor.out
+n-body.out
+pidigits.out
+regex-dna.out
+reverse-complement.out
+richards.out
+spectral-norm.out
+thread-ring.out
