@@ -1,7 +1,7 @@
-#Cpython2
+#CPython
 
 binary-trees,14
-chameneos-redux,6000000
+chameneos-redux,600000
 fannkuch-redux,10
 fasta,2500000
 k-nucleotide,0 < knucleotide-input.txt
@@ -11,12 +11,13 @@ pidigits,10000
 regex-dna,0 < regexdna-input.txt
 reverse-complement,0 < revcomp-input.txt
 thread-ring,5000000
+richards,10
 spectral-norm,550
 
 #Pypy
 
 binary-trees,14
-chameneos-redux,6000000
+chameneos-redux,600000
 fannkuch-redux,10
 fasta,2500000
 k-nucleotide,0 < knucleotide-input.txt
@@ -26,6 +27,7 @@ pidigits,10000
 regex-dna,0 < regexdna-input.txt
 reverse-complement,0 < revcomp-input.txt
 thread-ring,5000000
+richards,10
 spectral-norm,550
 
 #IronPython

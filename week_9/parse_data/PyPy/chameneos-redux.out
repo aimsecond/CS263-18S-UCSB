@@ -1,0 +1,33 @@
+blue + blue -> blue
+blue + red -> yellow
+blue + yellow -> red
+red + blue -> yellow
+red + red -> red
+red + yellow -> blue
+yellow + blue -> red
+yellow + red -> blue
+yellow + yellow -> yellow
+
+ blue red yellow
+389921 zero
+409453 zero
+400626 zero
+ one two zero zero zero zero zero
+
+ blue red yellow red yellow blue red yellow red blue
+119988 zero
+119985 zero
+119996 zero
+120016 zero
+120016 zero
+119982 zero
+120020 zero
+120004 zero
+119992 zero
+120001 zero
+ one two zero zero zero zero zero
+
+Elapsed time:  22.3179998398
+CPU time:  12.1875
+memory usage:  18140.0 KB
+CPU_load:  [24.0, 23.0, 27.0, 44.0]
