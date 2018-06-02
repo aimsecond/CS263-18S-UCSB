@@ -1,44 +1,53 @@
 #CPython
-
 binary-trees,14
 chameneos-redux,600000
-fannkuch-redux,10
 fasta,2500000
+fibonacci,1000000
 k-nucleotide,0 < knucleotide-input.txt
 meteor-contest,2098
 n-body,5000000
 pidigits,10000
+pystone,50000
 regex-dna,0 < regexdna-input.txt
 reverse-complement,0 < revcomp-input.txt
-thread-ring,5000000
 richards,10
 spectral-norm,550
-
+thread-ring,5000000
 #Pypy
-
 binary-trees,14
 chameneos-redux,600000
-fannkuch-redux,10
 fasta,2500000
+fibonacci,1000000
 k-nucleotide,0 < knucleotide-input.txt
 meteor-contest,2098
 n-body,5000000
 pidigits,10000
+pystone,50000
 regex-dna,0 < regexdna-input.txt
 reverse-complement,0 < revcomp-input.txt
-thread-ring,5000000
 richards,10
 spectral-norm,550
-
+thread-ring,5000000
 #IronPython
-
 fibonacci,1000000
 k-nucleotide,0 < knucleotide-input.txt
 n-body,5000000
 pidigits,10000
+pystone,50000
 regex-dna,0 < regexdna-input.txt
 richards,10
-reverse-complement,0 < revcomp-input.txt
-thread-ring,5000000
 spectral-norm,550
-
+thread-ring,5000000
+#Jython
+fasta,2500000
+fibonacci,1000000
+k-nucleotide,0 < knucleotide-input.txt
+meteor-contest,2098
+n-body,5000000
+pidigits,10000
+pystone,50000
+regex-dna,0 < regexdna-input.txt
+reverse-complement,0 < revcomp-input.txt
+richards,10
+spectral-norm,550
+thread-ring,5000000
