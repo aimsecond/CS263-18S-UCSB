@@ -1,7 +1,6 @@
 import os
 import psutil
 import subprocess
-from memory_profiler import profile
 import time
 import multiprocessing
 from sys import platform
@@ -41,25 +40,24 @@ def folder_name_modifier(name):
         if name == 'python':
             return 'CPython'
         elif name == 'jython':
-            retun 'Jython'
+            return 'Jython'
         elif name == 'ironpython':
             return 'IronPython'
-        elif name == 'pypy'
+        elif name == 'pypy':
             return "PyPy"
-        else
+        else:
             raise ValueError('name wrong. Check your proglist')
     except ValueError as err:
         print(err.args)
         
 def run_program(interpreter,programname,parameter):
     outputfilepath = os.path.join(current_dir_path,folder_name_modifier(interpreter))
-	if not os.path.exists(outputfilepath):
+    if not os.path.exists(outputfilepath):
         try:
             os.makedirs(outputfilepath)
         except:
             print("Error creating output file path: "+programname) 
-            break
-    outputfile = os.path.join(outputfilepath,programname.parse('.')[0]+'.out')
+    outputfile = os.path.join(outputfilepath,programname.split('.')[0]+'.out')
     mem_use = 0
     t = 0
     PERCPU_start = 0
@@ -76,11 +74,9 @@ def run_program(interpreter,programname,parameter):
     pi=p.pid
     
     while p.poll()is None:
-    	try:
-    		cpu_time=psutil.Process(pi).cpu_times()
-    		mem_use=max(psutil.Process(pi).memory_info().rss,mem_use)
-    	except:
-    		break
+        cpu_time=psutil.Process(pi).cpu_times()
+        mem_use=max(psutil.Process(pi).memory_info().rss,mem_use)
+
     elapsed_time = 	time.time()-t
     PERCPU_exit=psutil.cpu_times(percpu=True)
     
@@ -94,7 +90,7 @@ def run_program(interpreter,programname,parameter):
         	CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
 
     with open(outputfile,'a') as file:
-        print 'Elapsed time: ',time.time()-t
+        file.write('Elapsed time: ',str(time.time()-t))
         PERCPU_exit=psutil.cpu_times(percpu=True)
         print 'CPU time: ',cpu_time.children_user+cpu_time.children_system
         print 'memory usage: ',str(round(mem_use/1024,0))+' KB'
@@ -111,9 +107,10 @@ def main():
         if interpreter == 'cpython':
             interpreter = 'python'
         for i in value:
-            programname = i.parse(',')[0]
-            parameter = i.parse(',')[1]
-            run_program(interpreter,programname,parameter)
+            programname = i.split(',')[0]
+            parameter = i.split(',')[1]
+            print(interpreter,programname,parameter+"\n")
+            # run_program(interpreter,programname,parameter)
             
         
     

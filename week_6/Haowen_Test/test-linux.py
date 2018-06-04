@@ -1,7 +1,6 @@
 import os
 import psutil
 import subprocess
-from memory_profiler import profile
 import time
 
 # cpu_time = 0
@@ -12,7 +11,7 @@ PERCPU_start = psutil.cpu_times(percpu=True)
 t=time.time()
 
 # p=subprocess.Popen('python2 k-nucleotide.py', stdin=myinput, shell = True)
-p=subprocess.Popen('python2 binary-trees 19', shell = True)
+p=subprocess.Popen('pypy binary-trees 19', shell = True)
 pi=p.pid
 
 
@@ -27,6 +26,6 @@ PERCPU_exit=psutil.cpu_times(percpu=True)
 print 'CPU time: ',cpu_time
 print 'memory usage: ',str(round(mem_use/1024,0))+' KB'
 CPU_load=[]
-for i in range(8):
+for i in range(4):
 	CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
 print 'CPU_load: ',CPU_load
