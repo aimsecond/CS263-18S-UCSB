@@ -7,9 +7,6 @@
 # 2to3
 
 from sys import stdin
-import time
-import psutil
-import os
 
 def gen_freq(seq, frame, frequences):
     ns = len(seq) + 1 - frame
@@ -56,9 +53,4 @@ def main():
     for se in "GGT GGTA GGTATT GGTATTTTAATT GGTATTTTAATTTATAGT".split():
         find_seq(sequence, se, frequences)
 
-t=time.time()
 main()
-print 'user time: ',time.time()-t
-print 'overall cpu time:',psutil.Process(os.getpid()).cpu_times()
-print 'CPU load: ',psutil.cpu_percent(percpu=True)
-print 'overall cpu times: ',psutil.cpu_times()
