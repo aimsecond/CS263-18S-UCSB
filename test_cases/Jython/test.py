@@ -6,11 +6,11 @@ import time
 mem_use=0
 java_pid=0
 java_mem = 0
-# myinput = open('revcomp-input.txt')
+# myinput = open('regexdna-input.txt')
 PERCPU_start=psutil.cpu_times(percpu=True)
 t=time.time()
-
-p=subprocess.Popen('jython pidigits.jython 10000',creationflags =0)
+# p=subprocess.Popen('jython regex-dna.jython',stdin=myinput,creationflags =0)
+p=subprocess.Popen('jython mt.py',creationflags =0)
 pi=p.pid
 # p=subprocess.Popen('ipy n-body.ipy 5000000', creationflags =0)
 while True:
@@ -31,7 +31,7 @@ while p.poll()is None:
 print 'Elapsed time: ',time.time()-t
 PERCPU_exit=psutil.cpu_times(percpu=True)
 print 'CPU time: ',cpu_time.user+cpu_time.system+java_time.user+java_time.system
-print 'memory usage: ',str(round(mem_use+java_mem/1024,0))+' KB'
+print 'memory usage: ',str(round((mem_use+java_mem)/1024,0))+' KB'
 CPU_load=[]
 for i in range(4):
 	CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
