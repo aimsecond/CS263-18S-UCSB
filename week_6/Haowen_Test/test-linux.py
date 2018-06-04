@@ -3,29 +3,50 @@ import psutil
 import subprocess
 import time
 
-# cpu_time = 0
+cpu_time = 0
 mem_use = 0
-# myinput = open('knucleotide-input.txt')
+java_time = 0
+java_mem = 0
+myinput = open('regexdna-input.txt')
 
 PERCPU_start = psutil.cpu_times(percpu=True)
 t=time.time()
 
-# p=subprocess.Popen('python2 k-nucleotide.py', stdin=myinput, shell = True)
-p=subprocess.Popen('pypy binary-trees 19', shell = True)
+p=subprocess.Popen('jython regex-dna.jython', stdin=myinput, shell = True)
+# p=subprocess.Popen('jython binary-trees.jython 19', shell = True)
 pi=p.pid
-
+# while p.poll()is None:
+# 	try:
+# 		cpu_time=psutil.Process(pi).cpu_times()
+# 		mem_use=max(psutil.Process(pi).memory_info().rss,mem_use)
+# 	except:
+# 		break
+############
+java_pid = -1
+while True:
+	for pro in psutil.process_iter(attrs=['pid', 'name']):
+		if pro.info['name'] == "java":
+			java_pid=pro.info['pid']
+			break
+	if java_pid is not -1:
+		break
 
 while p.poll()is None:
 	try:
 		cpu_time=psutil.Process(pi).cpu_times()
 		mem_use=max(psutil.Process(pi).memory_info().rss,mem_use)
+		java_time=psutil.Process(java_pid).cpu_times()
+		java_mem=max(psutil.Process(java_pid).memory_info().rss,java_mem)
+		# print(cpu_time,mem_use,java_time,java_mem)
 	except:
 		break
+############
+# p.wait()
 print 'Elapsed time: ',time.time()-t
 PERCPU_exit=psutil.cpu_times(percpu=True)
-print 'CPU time: ',cpu_time
-print 'memory usage: ',str(round(mem_use/1024,0))+' KB'
+print 'CPU time: ',cpu_time+java_time
+print 'memory usage: ',str(round((mem_use+java_mem)/1024,0))+' KB'
 CPU_load=[]
-for i in range(4):
+for i in range(8):
 	CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
-print 'CPU_load: ',CPU_load
+print 'CPU_load: '+str(CPU_load)

@@ -6,11 +6,11 @@ import time
 mem_use=0
 java_pid=0
 java_mem = 0
-myinput = open('revcomp-input.txt')
+# myinput = open('revcomp-input.txt')
 PERCPU_start=psutil.cpu_times(percpu=True)
 t=time.time()
-p=subprocess.Popen('jython revcomp.jython',stdin=myinput,creationflags =0)
-# p=subprocess.Popen('jython pidigits.jython 10000',creationflags =0)
+
+p=subprocess.Popen('jython pidigits.jython 10000',creationflags =0)
 pi=p.pid
 # p=subprocess.Popen('ipy n-body.ipy 5000000', creationflags =0)
 while True:

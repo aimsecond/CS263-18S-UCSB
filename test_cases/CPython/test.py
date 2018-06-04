@@ -8,7 +8,8 @@ mem_use=0
 PERCPU_start=psutil.cpu_times(percpu=True)
 t=time.time()
 # p=subprocess.Popen('pypy reverse-complement.py',stdin=myinput,creationflags =0)
-p=subprocess.Popen('python2 n-body.py 5000000',creationflags =0)
+# p=subprocess.Popen('python2 n-body.py 5000000',creationflags =0)
+p=subprocess.Popen('python2 n-body.py 500000', shell = True)
 pi=p.pid
 # p=subprocess.Popen('ipy n-body.ipy 5000000', creationflags =0)
 while p.poll()is None:

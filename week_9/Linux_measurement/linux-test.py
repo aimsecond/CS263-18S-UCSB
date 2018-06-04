@@ -50,7 +50,7 @@ def folder_name_modifier(name):
     except ValueError as err:
         print(err.args)
         
-def run_program(interpreter,programname,parameter):
+def run_program(interpreter,programname,parameter,filepath):
     outputfilepath = os.path.join(current_dir_path,folder_name_modifier(interpreter))
     if not os.path.exists(outputfilepath):
         try:
@@ -63,7 +63,7 @@ def run_program(interpreter,programname,parameter):
     PERCPU_start = 0
 
     if parameter[-3:] == "txt":
-        myinput = open(parameter)
+        myinput = open(os.path.join(filepath,parameter))
         PERCPU_start = psutil.cpu_times(percpu=True)
         t=time.time()
         p=subprocess.Popen(interpreter+' '+programname, stdin=myinput, shell = True)
@@ -77,40 +77,45 @@ def run_program(interpreter,programname,parameter):
         cpu_time=psutil.Process(pi).cpu_times()
         mem_use=max(psutil.Process(pi).memory_info().rss,mem_use)
 
-    elapsed_time = 	time.time()-t
+    elapsed_time = 	str(time.time()-t)
     PERCPU_exit=psutil.cpu_times(percpu=True)
-    
     memory_usage = str(round(mem_use/1024,0))+' KB'
     CPU_load=[]
     if platform == "win32":
         CPU_time = cpu_time.user+cpu_time.system
     elif platform == "linux" or platform == "linux2":
         CPU_time = cpu_time.children_user+cpu_time.children_system
-        for i in range(cpu_corenumber):
-        	CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
+        if CPU_time == 0.0:
+            return False
+    for i in range(cpu_corenumber):
+        if PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle == 0.0:
+            CPU_load.append(0.0)
+        else:
+            CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
 
-    with open(outputfile,'a') as file:
-        file.write('Elapsed time: ',str(time.time()-t))
-        PERCPU_exit=psutil.cpu_times(percpu=True)
-        print 'CPU time: ',cpu_time.children_user+cpu_time.children_system
-        print 'memory usage: ',str(round(mem_use/1024,0))+' KB'
-        CPU_load=[]
-        for i in range(8):
-        	CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
-        print 'CPU_load: ',CPU_load
+    with open(outputfile,'w') as file:
+        file.write('Elapsed time: '+elapsed_time+'\n')
+        file.write('CPU time: '+ str(CPU_time)+'\n')
+        file.write('memory usage: '+memory_usage+'\n')
+        file.write('CPU_load: '+ str(CPU_load)+'\n')
+    return True
 
 def main():
     proglist = get_proglist_by_interpreter()
     print proglist
     for key,value in proglist.items():
+        filepath = os.path.join(os.path.dirname(os.path.dirname(current_dir_path)),'test_cases',key)
         interpreter = key.lower()
         if interpreter == 'cpython':
             interpreter = 'python'
+        elif interpreter == 'ironpython':
+            interpreter = 'ipy'
         for i in value:
-            programname = i.split(',')[0]
+            programname = os.path.join(filepath,i.split(',')[0])
             parameter = i.split(',')[1]
-            print(interpreter,programname,parameter+"\n")
-            # run_program(interpreter,programname,parameter)
+            print(interpreter,programname,parameter,filepath+"\n")
+            while not run_program(interpreter,programname,parameter,filepath):
+                continue
             
         
     
