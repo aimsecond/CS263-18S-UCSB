@@ -32,7 +32,7 @@ Week 8: [Jython](http://www.jython.org/) performance measurement
 
 Week 9: Compare these performance and produce the report
 
-Week 10: [Presentation](./Presentation/CS263_Haowen%20Zhang_Chang%20Lu.pptx) [google sides](https://drive.google.com/open?id=16QoiXhX2dvfamqzeEKq2266K3VaSQHRy2u68U0gBV1I)
+Week 10: [Presentation](./Presentation/CS263_Haowen%20Zhang_Chang%20Lu.pptx) | [google sides](https://drive.google.com/open?id=16QoiXhX2dvfamqzeEKq2266K3VaSQHRy2u68U0gBV1I)
 
 ---
 **Project Member**
