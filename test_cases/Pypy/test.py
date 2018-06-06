@@ -8,13 +8,14 @@ mem_use=0
 PERCPU_start=psutil.cpu_times(percpu=True)
 t=time.time()
 # p=subprocess.Popen('pypy k-nucleotide.py',stdin=myinput,creationflags =0)
-p=subprocess.Popen('pypy richards.py 10',creationflags =0)
+p=subprocess.Popen('pypy fasta.py 25000',shell = True)
+
 pi=p.pid
 # p=subprocess.Popen('ipy n-body.ipy 5000000', creationflags =0)
 while p.poll()is None:
 	try:
 		cpu_time=psutil.Process(pi).cpu_times()
-		mem_use=max(psutil.Process(pi).memory_info().rss,mem_use)
+		mem_use=max(psutil.Process(pi).memory_full_info().rss,mem_use)
 	except:
 		break
 print 'Elapsed time: ',time.time()-t

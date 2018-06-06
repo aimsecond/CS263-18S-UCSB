@@ -12,8 +12,8 @@ myinput = open('regexdna-input.txt')
 PERCPU_start = psutil.cpu_times(percpu=True)
 t=time.time()
 
-p=subprocess.Popen('jython regex-dna.jython', stdin=myinput, shell = True)
-# p=subprocess.Popen('jython binary-trees.jython 19', shell = True)
+# p=subprocess.Popen('jython regex-dna.jython', stdin=myinput, shell = True)
+p=subprocess.Popen('jython fasta.jython 25000', shell = True)
 pi=p.pid
 # while p.poll()is None:
 # 	try:
@@ -37,14 +37,13 @@ while p.poll()is None:
 		mem_use=max(psutil.Process(pi).memory_info().rss,mem_use)
 		java_time=psutil.Process(java_pid).cpu_times()
 		java_mem=max(psutil.Process(java_pid).memory_info().rss,java_mem)
-		# print(cpu_time,mem_use,java_time,java_mem)
 	except:
 		break
 ############
 # p.wait()
 print 'Elapsed time: ',time.time()-t
 PERCPU_exit=psutil.cpu_times(percpu=True)
-print 'CPU time: ',cpu_time+java_time
+print 'CPU time: ',cpu_time.children_user+cpu_time.children_system+java_time.user+java_time.system
 print 'memory usage: ',str(round((mem_use+java_mem)/1024,0))+' KB'
 CPU_load=[]
 for i in range(8):
