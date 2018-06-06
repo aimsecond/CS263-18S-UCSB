@@ -13,7 +13,7 @@ PERCPU_start = psutil.cpu_times(percpu=True)
 t=time.time()
 
 # p=subprocess.Popen('jython regex-dna.jython', stdin=myinput, shell = True)
-p=subprocess.Popen('jython fasta.jython 25000', shell = True)
+p=subprocess.Popen('jython n-body.jython 5000000', shell = True)
 pi=p.pid
 # while p.poll()is None:
 # 	try:
@@ -46,6 +46,6 @@ PERCPU_exit=psutil.cpu_times(percpu=True)
 print 'CPU time: ',cpu_time.children_user+cpu_time.children_system+java_time.user+java_time.system
 print 'memory usage: ',str(round((mem_use+java_mem)/1024,0))+' KB'
 CPU_load=[]
-for i in range(8):
+for i in range(4):
 	CPU_load.append(((PERCPU_exit[i].user-PERCPU_start[i].user)/(PERCPU_exit[i].user-PERCPU_start[i].user+PERCPU_exit[i].idle-PERCPU_start[i].idle))*100//1)
 print 'CPU_load: '+str(CPU_load)

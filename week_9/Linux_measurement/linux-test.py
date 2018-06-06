@@ -37,7 +37,7 @@ def get_proglist_by_interpreter():
 #for name consistency
 def folder_name_modifier(name):
     try:
-        if name == 'python':
+        if name == 'python2':
             return 'CPython'
         elif name == 'jython':
             return 'Jython'
@@ -150,7 +150,7 @@ def main():
         filepath = os.path.join(os.path.dirname(os.path.dirname(current_dir_path)),'test_cases',key)
         interpreter = key.lower()
         if interpreter == 'cpython':
-            interpreter = 'python'
+            interpreter = 'python2'
         elif interpreter == 'ironpython':
             interpreter = 'ipy'
         for i in value:
