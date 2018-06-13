@@ -4,14 +4,16 @@ import subprocess
 import time
 
 mem_use=0
-# myinput = open('revcomp-input.txt')
+myinput = open('revcomp-input.txt')
 PERCPU_start=psutil.cpu_times(percpu=True)
 t=time.time()
-# p=subprocess.Popen('pypy reverse-complement.py',stdin=myinput,creationflags =0)
+
+p=subprocess.Popen('pypy reverse-complement.py',stdin=myinput,creationflags =0)
+# ==== if program does't have a input file
 # p=subprocess.Popen('python2 n-body.py 5000000',creationflags =0)
+
 p=subprocess.Popen('python2 n-body.py 500000', shell = True)
 pi=p.pid
-# p=subprocess.Popen('ipy n-body.ipy 5000000', creationflags =0)
 while p.poll()is None:
 	try:
 		cpu_time=psutil.Process(pi).cpu_times()
