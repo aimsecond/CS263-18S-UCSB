@@ -6,12 +6,7 @@ The repository for uploading UCSB [CS263: Runtime System](http://www.cs.ucsb.edu
 **Project Member**
 
 Chang Lu [Email](changlu@umail.ucsb.edu)
-
-<img src="./week_2/Chang%20Lu.JPG" width="250">
-
 Haowen Zhang [Email](haowen@ucsb.edu)
-
-<img src="./week_2/Haowen%20Zhang.JPG" width="250">
 
 ---
 **Project Idea**
